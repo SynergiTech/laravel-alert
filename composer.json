@@ -1,0 +1,29 @@
+{
+    "name": "synergitech/laravel-alert",
+    "description": "Construct custom alerts with Laravel",
+    "keywords": ["laravel", "alert"],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.0.0",
+        "illuminate/support": "~5.0",
+        "illuminate/session": "~5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SynergiTech\\Alert\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SynergiTech\\Alert\\ServiceProvider"
+            ],
+            "aliases": {
+                "Alert": "SynergiTech\\Alert\\Facade"
+            }
+        }
+    }
+}
