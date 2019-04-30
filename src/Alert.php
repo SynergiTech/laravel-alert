@@ -116,7 +116,7 @@ class Alert
                     array_key_exists('type', $this->fields) &&
                     array_key_exists($this->fields['type'], config('alert.icons_by_type', []))
                 ) {
-                    $output[$from] = config('alert.icons_by_type')[$output['type']];
+                    $output[$from] = config('alert.icons_by_type')[$this->fields['type']];
                 }
             }
 
