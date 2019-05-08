@@ -5,6 +5,26 @@ namespace SynergiTech\Alert;
 use Illuminate\Session\Store;
 use BadMethodCallException;
 
+/**
+ * For static analysis (Larastan) support, here are the
+ * available methods as per the default config.
+ *
+ * If you use a different configuration, you will need to
+ * either extend this class to update this docblock
+ * or add ignoreErrors lines to your larastan.neon
+ *
+ * Set multiple alert properties
+ * @method Alert info(string $text, string $title = '')
+ * @method Alert success(string $text, string $title = '')
+ * @method Alert error(string $text, string $title = '')
+ * @method Alert warning(string $text, string $title = '')
+ *
+ * Set specific alert properties
+ * @method Alert title(string $value)
+ * @method Alert text(string $value)
+ * @method Alert type(string $value)
+ */
+
 class Alert
 {
     /**

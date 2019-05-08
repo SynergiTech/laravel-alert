@@ -7,7 +7,7 @@ if (! function_exists('alert')) {
      * @param string|null $message
      * @param string      $title
      *
-     * @return \SynergiTech\AlertNotifier
+     * @return \SynergiTech\Alert\Alert
      */
     function alert($message = null, $title = '')
     {
