@@ -7,7 +7,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     /**
      * {@inheritdoc}
      */
-    public function boot()
+    public function boot(): void
     {
         $basePath = __DIR__ . '/../';
         $configPath = $basePath . 'config/alert.php';

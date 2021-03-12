@@ -4,11 +4,14 @@ env:
   - LARAVEL=5
   - LARAVEL=6
   - LARAVEL=7
+  - LARAVEL=8
 
 php:
+  - 7.1
   - 7.2
   - 7.3
   - 7.4
+  - 8.0
 
 before_script:
   - composer require illuminate/support ^${LARAVEL}.0
