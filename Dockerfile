@@ -19,6 +19,9 @@ COPY composer.json ./
 ARG LARAVEL=7
 RUN composer require illuminate/support ^$LARAVEL.0
 
-COPY . .
+COPY src src
+COPY config config
+COPY tests tests
+COPY phpunit.xml phpstan.neon ./
 
-RUN vendor/bin/phpunit --configuration phpunit.xml
+RUN composer test
