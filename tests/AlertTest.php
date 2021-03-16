@@ -12,14 +12,18 @@ class AlertTest extends BaseTestCase
 {
     /**
      * setup testbench
+     *
+     * @return array<class-string>
      */
-
     protected function getPackageProviders($app)
     {
         return [ServiceProvider::class];
     }
 
-    protected function getPackageAliases($app)
+    /**
+     * @return array<string, class-string>
+     */
+    protected function getPackageAliases($app): array
     {
         return [
             'Alert' => Facade::class,
@@ -29,8 +33,7 @@ class AlertTest extends BaseTestCase
     /**
      * avoid duplicating the assertions
      */
-
-    private function assertInputMatchesOutput(array $input)
+    private function assertInputMatchesOutput(array $input): void
     {
         $output = session()->pull('alert.sweetalert');
         $this->assertNotNull($output);
@@ -49,8 +52,7 @@ class AlertTest extends BaseTestCase
     /**
      * tests below
      */
-
-    public function testFunction()
+    public function testFunction(): void
     {
         $input = [
             'text' => 'this is a message',
@@ -62,7 +64,7 @@ class AlertTest extends BaseTestCase
         $this->assertInputMatchesOutput($input);
     }
 
-    public function testTypeMethodFromFunction()
+    public function testTypeMethodFromFunction(): void
     {
         $input = [
             'text' => 'this is a message',
@@ -75,7 +77,7 @@ class AlertTest extends BaseTestCase
         $this->assertInputMatchesOutput($input);
     }
 
-    public function testPropertyMethodFromFunction()
+    public function testPropertyMethodFromFunction(): void
     {
         $input = [
             'text' => 'this is a message',
@@ -87,13 +89,13 @@ class AlertTest extends BaseTestCase
         $this->assertInputMatchesOutput($input);
     }
 
-    public function testHandleUnexpectedMethodFromFunction()
+    public function testHandleUnexpectedMethodFromFunction(): void
     {
         $this->expectException(BadMethodCallException::class);
         alert()->unknownMethod();
     }
 
-    public function testFacade()
+    public function testFacade(): void
     {
         $input = [
             'text' => 'this is a message',
@@ -105,7 +107,7 @@ class AlertTest extends BaseTestCase
         $this->assertInputMatchesOutput($input);
     }
 
-    public function testTypeMethodFromFacade()
+    public function testTypeMethodFromFacade(): void
     {
         $input = [
             'text' => 'this is a message',
@@ -118,7 +120,7 @@ class AlertTest extends BaseTestCase
         $this->assertInputMatchesOutput($input);
     }
 
-    public function testPropertyMethodFromFacade()
+    public function testPropertyMethodFromFacade(): void
     {
         $input = [
             'text' => 'this is a message',
@@ -130,7 +132,7 @@ class AlertTest extends BaseTestCase
         $this->assertInputMatchesOutput($input);
     }
 
-    public function testHandleUnexpectedMethodFromFacade()
+    public function testHandleUnexpectedMethodFromFacade(): void
     {
         $this->expectException(BadMethodCallException::class);
         Alert::unknownMethod();

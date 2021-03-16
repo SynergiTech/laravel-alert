@@ -33,11 +33,9 @@ class Alert
     protected $session;
 
     /**
-     * Configuration options
-     *
-     * @var array
+     * @var array<string, mixed>
      */
-    protected $config;
+    protected $fields;
 
     /**
      * Create a new Alert instance
@@ -95,7 +93,7 @@ class Alert
      * Handle setting values via a method named after the alert type or a method named after the value
      *
      * @param string $name the called method
-     * @param array $args the arguments called on the method
+     * @param array<string> $args the arguments called on the method
      *
      * @return \SynergiTech\Alert\Alert $this
      */
