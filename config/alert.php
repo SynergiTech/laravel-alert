@@ -18,12 +18,15 @@ return [
     // - the icon won't be applied if you have already set one
     'icons_by_type' => [],
 
-    // map the fields to plugin output
+    // Support multiple popup/alert plugins by adding them to the output list.
+    // You can specify which fields to output (values) and what object key (keys)
+    // they should be named for each plugin. The default sweetalert config works
+    // for v9+. Older sweetalert versions should use `type` instead of `icon`.
     'output' => [
         'sweetalert' => [
             'title' => 'title',
             'text' => 'text',
-            'type' => 'type',
+            'icon' => 'type',
         ],
     ],
 

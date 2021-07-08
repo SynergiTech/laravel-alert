@@ -44,8 +44,8 @@ class AlertTest extends BaseTestCase
             $this->assertSame($input[$key], $output[$key]);
         }
 
-        if (! isset($input['type'])) {
-            $this->assertEmpty($output['type']);
+        if (! isset($input['icon'])) {
+            $this->assertEmpty($output['icon']);
         }
     }
 
@@ -69,10 +69,10 @@ class AlertTest extends BaseTestCase
         $input = [
             'text' => 'this is a message',
             'title' => 'title',
-            'type' => 'success',
+            'icon' => 'success',
         ];
 
-        alert()->{$input['type']}($input['text'], $input['title']);
+        alert()->{$input['icon']}($input['text'], $input['title']);
 
         $this->assertInputMatchesOutput($input);
     }
@@ -112,10 +112,10 @@ class AlertTest extends BaseTestCase
         $input = [
             'text' => 'this is a message',
             'title' => 'title',
-            'type' => 'success',
+            'icon' => 'success',
         ];
 
-        Alert::{$input['type']}($input['text'], $input['title']);
+        Alert::{$input['icon']}($input['text'], $input['title']);
 
         $this->assertInputMatchesOutput($input);
     }
