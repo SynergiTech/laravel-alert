@@ -38,6 +38,11 @@ class Alert
     protected $fields;
 
     /**
+     * @var string|null
+     */
+    protected $desiredOutput = null;
+
+    /**
      * Create a new Alert instance
      *
      * @param \Illuminate\Session\Store $session interface with Laravels session
@@ -57,6 +62,26 @@ class Alert
     public function reset(): void
     {
         $this->fields = config('alert.fields');
+    }
+
+    /**
+     * @param string|null $desiredOutput
+     * @return \SynergiTech\Alert\Alert $this
+     */
+    public function as($desiredOutput): Alert
+    {
+        return $this->output($desiredOutput);
+    }
+
+    /**
+     * @param string|null $desiredOutput
+     * @return \SynergiTech\Alert\Alert $this
+     */
+    public function output($desiredOutput): Alert
+    {
+        $this->desiredOutput = $desiredOutput;
+
+        return $this;
     }
 
     /**
@@ -123,6 +148,10 @@ class Alert
     private function putConfig(): void
     {
         foreach (config('alert.output', []) as $plugin => $map) {
+            if ($this->desiredOutput !== null && $this->desiredOutput != $plugin) {
+                $this->session->remove("alert.$plugin");
+                continue;
+            }
             $output = [];
             foreach ($map as $from => $to) {
                 $output[$from] = $this->fields[$to] ?? '';

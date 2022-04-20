@@ -132,6 +132,52 @@ class AlertTest extends BaseTestCase
         $this->assertInputMatchesOutput($input);
     }
 
+    public function testOutputs(): void
+    {
+        $ogConfig = config('alert');
+
+        // add a second output type to config
+        $newConfig = $ogConfig;
+        $newConfig['output']['toast'] = $newConfig['output']['sweetalert'];
+        config(['alert' => $newConfig]);
+
+        alert()->info('hello');
+
+        // assert both output types from config were used simultaneously
+
+        $output = session()->pull('alert.sweetalert');
+        $this->assertNotNull($output);
+
+        $output = session()->pull('alert.toast');
+        $this->assertNotNull($output);
+
+        // create both kinds of alerts
+        alert()->info('hello');
+
+        // specifically request only a toast
+        alert()->as('toast')->info('hello');
+
+        // specific toast should unset the original alert
+        $output = session()->pull('alert.sweetalert');
+        $this->assertNull($output);
+
+        // confirm toast still exists
+        $output = session()->pull('alert.toast');
+        $this->assertNotNull($output);
+
+        // repeat using output instead of as
+
+        alert()->info('hello');
+        alert()->output('toast')->info('hello');
+        $output = session()->pull('alert.sweetalert');
+        $this->assertNull($output);
+        $output = session()->pull('alert.toast');
+        $this->assertNotNull($output);
+
+        // put the config back just in case?
+        // config(['alert' => $ogConfig]);
+    }
+
     public function testHandleUnexpectedMethodFromFacade(): void
     {
         $this->expectException(BadMethodCallException::class);
