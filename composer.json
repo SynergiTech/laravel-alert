@@ -1,12 +1,19 @@
 {
     "name": "synergitech/laravel-alert",
     "description": "Construct custom alerts with Laravel",
-    "keywords": ["laravel", "alert"],
     "license": "MIT",
+    "keywords": [
+        "laravel",
+        "alert"
+    ],
     "require": {
         "php": "^7.1 || ^8.0",
-        "illuminate/support": "^5.0||^6.0||^7.0||^8.0||^9.0",
-        "illuminate/session": "^5.0||^6.0||^7.0||^8.0||^9.0"
+        "illuminate/session": "^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+        "illuminate/support": "^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.8 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
+        "phpstan/phpstan": "^1"
     },
     "autoload": {
         "psr-4": {
@@ -18,17 +25,13 @@
     },
     "extra": {
         "laravel": {
-            "providers": [
-                "SynergiTech\\Alert\\ServiceProvider"
-            ],
             "aliases": {
                 "Alert": "SynergiTech\\Alert\\Facade"
-            }
+            },
+            "providers": [
+                "SynergiTech\\Alert\\ServiceProvider"
+            ]
         }
-    },
-    "require-dev": {
-        "orchestra/testbench": "^3.8||^4.0||^5.0||^6.0||^7.0",
-        "phpstan/phpstan": "^1"
     },
     "scripts": {
         "test": [
