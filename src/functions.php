@@ -3,13 +3,8 @@
 if (! function_exists('alert')) {
     /**
      * Arrange for an alert message.
-     *
-     * @param string|null $message
-     * @param string      $title
-     *
-     * @return \SynergiTech\Alert\Alert
      */
-    function alert($message = null, $title = '')
+    function alert(string $message = null, string $title = ''): \SynergiTech\Alert\Alert
     {
         $notifier = app('synergitech.alert');
 

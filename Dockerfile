@@ -1,4 +1,4 @@
-ARG PHP_VERSION=7.3
+ARG PHP_VERSION=8.0
 FROM php:$PHP_VERSION-cli-alpine
 
 RUN apk add git zip unzip autoconf make g++
@@ -10,12 +10,12 @@ WORKDIR /package
 
 COPY composer.json ./
 
-ARG LARAVEL=7
+ARG LARAVEL=8
 RUN composer require illuminate/support ^$LARAVEL.0
 
 COPY src src
 COPY config config
 COPY tests tests
-COPY phpunit.xml phpstan.neon ./
+COPY phpunit.xml ./
 
 RUN composer test
