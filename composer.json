@@ -38,7 +38,7 @@
     "scripts": {
         "test": [
             "Composer\\Config::disableProcessTimeout",
-            "phpunit",
+            "XDEBUG_MODE=coverage phpunit",
             "parallel-lint --exclude vendor .",
             "phpcs --standard=PSR12 src/ tests/",
             "phpstan analyse --level 9 src"
