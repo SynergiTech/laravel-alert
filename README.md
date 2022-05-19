@@ -1,6 +1,6 @@
 # Laravel Alert
 
-[![Build Status](https://travis-ci.org/SynergiTech/laravel-alert.svg?branch=master)](https://travis-ci.org/SynergiTech/laravel-alert)
+[![Tests](https://github.com/SynergiTech/laravel-alert/actions/workflows/test.yml/badge.svg)](https://github.com/SynergiTech/laravel-alert/actions/workflows/test.yml)
 
 Inspired by [Easy Sweet Alert Messages for Laravel](https://github.com/uxweb/sweet-alert), this package provides a way of constructing alerts for the UI of your app.
 
@@ -12,7 +12,7 @@ Out of the box, this package supports [SweetAlert2](https://sweetalert2.github.i
 composer require synergitech/laravel-alert
 ```
 
-Laravel (> 5.5) should be able to automatically detect the package and include it.
+Laravel should be able to automatically detect the package and include it.
 
 You should also make sure you have appropriately installed SweetAlert2 and/or any other notification package into your apps UI.
 
@@ -81,4 +81,36 @@ You can customise the fields available by publishing the config to your applicat
 
 ```sh
 php artisan vendor:publish --provider="SynergiTech\Alert\ServiceProvider"
+```
+
+### Multiple Output Types
+
+If you specify a second output, for example to create a toast option, this library will always add **both** to the session _unless_ you ask for a specific type (v2 only).
+
+```php
+// in your controller
+
+alert()->output('toast')->info('Please check your settings.');
+
+// OR
+
+alert()->as('toast')->info('Please check your settings.');
+```
+
+Example config:
+
+```php
+// config/alert.php
+
+'output' => [
+    'sweetalert' => [
+        'title' => 'title',
+        'text' => 'text',
+        'icon' => 'type',
+    ],
+    'toast' => [
+        'text' => 'text',
+        'icon' => 'type',
+    ],
+],
 ```
