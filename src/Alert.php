@@ -43,7 +43,10 @@ class Alert
      */
     public function reset(): void
     {
-        $this->fields = config('alert.fields');
+        /** @var array<string, mixed> $fieldsFromConfig */
+        $fieldsFromConfig = config('alert.fields', []);
+
+        $this->fields = $fieldsFromConfig;
     }
 
     /**
@@ -77,11 +80,14 @@ class Alert
      */
     public function __call(string $name, array $args): Alert
     {
+        /** @var array<string> $alertTypesFromConfig */
+        $alertTypesFromConfig = config('alert.types', []);
+
         if (array_key_exists($name, $this->fields)) {
             $this->fields[$name] = (count($args) == 1) ? reset($args) : $args;
 
             $this->putConfig();
-        } elseif (in_array($name, config('alert.types', []))) {
+        } elseif (in_array($name, $alertTypesFromConfig)) {
             $text = $args[0] ?? '';
             $title = (count($args) == 2) ? $args[1] : '';
 
@@ -98,7 +104,13 @@ class Alert
      */
     private function putConfig(): void
     {
-        foreach (config('alert.output', []) as $plugin => $map) {
+        /** @var array<string, array<string, string>> $alertOutputsFromConfig */
+        $alertOutputsFromConfig = config('alert.output', []);
+
+        /** @var array<string, string> $alertIconsByTypeFromConfig */
+        $alertIconsByTypeFromConfig = config('alert.icons_by_type', []);
+
+        foreach ($alertOutputsFromConfig as $plugin => $map) {
             $output = [];
             foreach ($map as $from => $to) {
                 $output[$from] = $this->fields[$to] ?? '';
@@ -106,11 +118,12 @@ class Alert
                 if (
                     $to == 'icon' &&
                     array_key_exists('icon', $this->fields) &&
-                    strlen($this->fields['icon']) == 0 &&
+                    ! empty($this->fields['icon']) &&
                     array_key_exists('type', $this->fields) &&
-                    array_key_exists($this->fields['type'], config('alert.icons_by_type', []))
+                    is_string($this->fields['type']) &&
+                    array_key_exists($this->fields['type'], $alertIconsByTypeFromConfig)
                 ) {
-                    $output[$from] = config('alert.icons_by_type')[$this->fields['type']];
+                    $output[$from] = $alertIconsByTypeFromConfig[$this->fields['type']];
                 }
             }
 
