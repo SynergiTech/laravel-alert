@@ -37,7 +37,7 @@
         "test": [
             "Composer\\Config::disableProcessTimeout",
             "phpunit",
-            "phpstan analyse src"
+            "phpstan analyse --level 8 src"
         ]
     }
 }

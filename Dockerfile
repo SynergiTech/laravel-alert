@@ -16,6 +16,6 @@ RUN composer require illuminate/support ^$LARAVEL.0
 COPY src src
 COPY config config
 COPY tests tests
-COPY phpunit.xml phpstan.neon ./
+COPY phpunit.xml ./
 
 RUN composer test
