@@ -82,13 +82,3 @@ You can customise the fields available by publishing the config to your applicat
 ```sh
 php artisan vendor:publish --provider="SynergiTech\Alert\ServiceProvider"
 ```
-
-The config allows you to apply custom icons to your message based on the type if your plugin requires Font Awesome-style classes. Read the config file for exact steps but here is an example configuration for it.
-
-```php
-'icons_by_type' => [
-    'success' => 'fa fa-check',
-    'warning' => 'fas fa-exclamation',
-    'info' => 'fa fa-info',
-]
-```

@@ -129,9 +129,6 @@ class Alert
         /** @var array<string, array<string, string>> $alertOutputsFromConfig */
         $alertOutputsFromConfig = config('alert.output', []);
 
-        /** @var array<string, string> $alertIconsByTypeFromConfig */
-        $alertIconsByTypeFromConfig = config('alert.icons_by_type', []);
-
         foreach ($alertOutputsFromConfig as $plugin => $map) {
             if ($this->desiredOutput !== null && $this->desiredOutput != $plugin) {
                 $this->session->remove("alert.$plugin");
@@ -141,17 +138,6 @@ class Alert
             $output = [];
             foreach ($map as $from => $to) {
                 $output[$from] = $this->fields[$to] ?? '';
-
-                if (
-                    $to == 'icon' &&
-                    array_key_exists('icon', $this->fields) &&
-                    ! empty($this->fields['icon']) &&
-                    array_key_exists('type', $this->fields) &&
-                    is_string($this->fields['type']) &&
-                    array_key_exists($this->fields['type'], $alertIconsByTypeFromConfig)
-                ) {
-                    $output[$from] = $alertIconsByTypeFromConfig[$this->fields['type']];
-                }
             }
 
             $this->session->put("alert.$plugin", json_encode($output));
