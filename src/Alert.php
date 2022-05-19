@@ -27,18 +27,15 @@ use BadMethodCallException;
 
 class Alert
 {
-    protected Store $session;
-
     /**
      * @var array<string, mixed>
      */
     protected array $fields;
 
-    public function __construct(Store $session)
-    {
+    public function __construct(
+        protected Store $session
+    ) {
         $this->reset();
-
-        $this->session = $session;
     }
 
     /**
@@ -54,7 +51,7 @@ class Alert
      *
      * By default the alert is not typed.
      */
-    public function message(string $text, string $title = '', string $type = null): Alert
+    public function message(string $text, string $title = '', string $type = null): self
     {
         if (array_key_exists('text', $this->fields)) {
             $this->fields['text'] = $text;
