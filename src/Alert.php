@@ -27,21 +27,13 @@ use BadMethodCallException;
 
 class Alert
 {
-    /**
-     * @var \Illuminate\Session\Store
-     */
-    protected $session;
+    protected Store $session;
 
     /**
      * @var array<string, mixed>
      */
-    protected $fields;
+    protected array $fields;
 
-    /**
-     * Create a new Alert instance
-     *
-     * @param \Illuminate\Session\Store $session interface with Laravels session
-     */
     public function __construct(Store $session)
     {
         $this->reset();
@@ -51,8 +43,6 @@ class Alert
 
     /**
      * Sets all default fields options
-     *
-     * @return void
      */
     public function reset(): void
     {
@@ -63,14 +53,8 @@ class Alert
      * Display an alert message with a text and an optional title.
      *
      * By default the alert is not typed.
-     *
-     * @param string $text
-     * @param string $type
-     * @param string $title
-     *
-     * @return \SynergiTech\Alert\Alert $this
      */
-    public function message($text, $title = '', $type = null): Alert
+    public function message(string $text, string $title = '', string $type = null): Alert
     {
         if (array_key_exists('text', $this->fields)) {
             $this->fields['text'] = $text;
@@ -92,10 +76,7 @@ class Alert
     /**
      * Handle setting values via a method named after the alert type or a method named after the value
      *
-     * @param string $name the called method
      * @param array<string> $args the arguments called on the method
-     *
-     * @return \SynergiTech\Alert\Alert $this
      */
     public function __call(string $name, array $args): Alert
     {
@@ -117,8 +98,6 @@ class Alert
 
     /**
      * Put the current alert configuration to the session
-     *
-     * @return void
      */
     private function putConfig(): void
     {
