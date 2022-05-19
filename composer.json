@@ -41,7 +41,7 @@
             "phpunit",
             "parallel-lint --exclude vendor .",
             "phpcs --standard=PSR12 src/ tests/",
-            "phpstan analyse --level 8 src"
+            "phpstan analyse --level 9 src"
         ]
     }
 }
