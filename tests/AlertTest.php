@@ -137,4 +137,32 @@ class AlertTest extends BaseTestCase
         $this->expectException(BadMethodCallException::class);
         Alert::unknownMethod();
     }
+
+    public function testCustomConfig(): void
+    {
+        config([
+            'alert.output.custom' => [
+                'alpha' => 'text',
+                'beta' => 'title',
+                'delta' => 'type',
+            ],
+        ]);
+
+        $input = [
+            'text' => 'this is a message',
+            'title' => 'title',
+            'type' => 'success',
+        ];
+
+        Alert::{$input['type']}($input['text'], $input['title']);
+
+        $output = session()->pull('alert.custom');
+        $this->assertNotNull($output);
+
+        $output = (array) json_decode($output);
+
+        $this->assertSame('this is a message', $output['alpha']);
+        $this->assertSame('title', $output['beta']);
+        $this->assertSame('success', $output['delta']);
+    }
 }
