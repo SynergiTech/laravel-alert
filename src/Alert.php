@@ -126,16 +126,6 @@ class Alert
             $output = [];
             foreach ($map as $from => $to) {
                 $output[$from] = $this->fields[$to] ?? '';
-
-                if (
-                    $to == 'icon' &&
-                    array_key_exists('icon', $this->fields) &&
-                    strlen($this->fields['icon']) == 0 &&
-                    array_key_exists('type', $this->fields) &&
-                    array_key_exists($this->fields['type'], config('alert.icons_by_type', []))
-                ) {
-                    $output[$from] = config('alert.icons_by_type')[$this->fields['type']];
-                }
             }
 
             $this->session->put("alert.$plugin", json_encode($output));

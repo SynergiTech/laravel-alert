@@ -13,11 +13,6 @@ return [
         'type' => '',
     ],
 
-    // apply an icon by the alerts type
-    // - you will need to include icon in the fields list to make this happen
-    // - the icon won't be applied if you have already set one
-    'icons_by_type' => [],
-
     // Support multiple popup/alert plugins by adding them to the output list.
     // You can specify which fields to output (values) and what object key (keys)
     // they should be named for each plugin. The default sweetalert config works
