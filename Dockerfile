@@ -13,14 +13,20 @@ RUN curl -sS https://getcomposer.org/installer | php \
 
 WORKDIR /package
 
-COPY composer.json ./
+RUN adduser -D -g '' dev
+
+RUN chown dev -R /package
+
+USER dev
+
+COPY --chown=dev composer.json ./
 
 ARG LARAVEL=8
 RUN composer require illuminate/support ^$LARAVEL.0
 
-COPY src src
-COPY config config
-COPY tests tests
-COPY phpunit.xml ./
+COPY --chown=dev src src
+COPY --chown=dev config config
+COPY --chown=dev tests tests
+COPY --chown=dev phpunit.xml ./
 
 RUN composer test
