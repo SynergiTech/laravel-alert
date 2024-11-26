@@ -76,7 +76,7 @@ class Alert
      *
      * By default the alert is not typed.
      */
-    public function message(string $text, string $title = '', string $type = null): self
+    public function message(string $text, string $title = '', ?string $type = null): self
     {
         if (array_key_exists('text', $this->fields)) {
             $this->fields['text'] = $text;

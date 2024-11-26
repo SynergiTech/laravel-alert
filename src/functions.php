@@ -6,7 +6,7 @@ if (! function_exists('alert')) {
     /**
      * Arrange for an alert message.
      */
-    function alert(string $message = null, string $title = ''): Alert
+    function alert(?string $message = null, string $title = ''): Alert
     {
         /** @var Alert $notifier */
         $notifier = app('synergitech.alert');
